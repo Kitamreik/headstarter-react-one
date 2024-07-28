@@ -1,0 +1,36 @@
+.EntryList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .EntryList .entry {
+    background: #fff;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+  .EntryList .entry:hover {
+    background: #f9f9f9;
+  }
+  
+  .EntryList .entry button {
+    background-color: #ff7e5f;
+    color: #fff;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .EntryList .entry button:hover {
+    background-color: #feb47b;
+  }
+  
