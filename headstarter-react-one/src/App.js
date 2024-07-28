@@ -1,27 +1,45 @@
-// src/App.js
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import EntryForm from './components/EntryForm';
+import EntryList from './components/EntryList';
+import './App.css';
 
 function App() {
-  const [data, setData] = useState(null);
+  const [entries, setEntries] = useState([]);
+  const [selectedEntry, setSelectedEntry] = useState(null);
 
   useEffect(() => {
-    //Urls that can be tested:
-    /*
-    http://localhost:5000/
-    http://localhost:5000/about
-    http://localhost:5000/error
-    http://localhost:5000/api/data
-    http://localhost:5000/api/data/create
-    */
-    fetch('http://localhost:5000/')
-      .then(response => response.json())
-      .then(data => setData(data.message))
-      .catch(error => console.error('Error fetching data:', error));
+    // Fetch initial entries from API or mock data
+    const initialEntries = [];
+    setEntries(initialEntries);
   }, []);
+
+  const handleCreate = (entry) => {
+    setEntries([...entries, entry]);
+  };
+
+  const handleUpdate = (entry) => {
+    const updatedEntries = entries.map((e) => (e.id === entry.id ? entry : e));
+    setEntries(updatedEntries);
+  };
+
+  const handleDelete = (id) => {
+    const updatedEntries = entries.filter((e) => e.id !== id);
+    setEntries(updatedEntries);
+  };
 
   return (
     <div className="App">
-      <h1>{data ? data : 'Loading...'}</h1>     
+      <h1>Entry Manager</h1>
+      <EntryForm
+        onCreate={handleCreate}
+        onUpdate={handleUpdate}
+        selectedEntry={selectedEntry}
+      />
+      <EntryList
+        entries={entries}
+        onSelect={(entry) => setSelectedEntry(entry)}
+        onDelete={handleDelete}
+      />
     </div>
   );
 }
